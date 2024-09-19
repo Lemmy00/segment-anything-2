@@ -17,7 +17,7 @@ from sam2.modeling.sam2_base import SAM2Base
 from sam2.utils.transforms import SAM2Transforms
 
 
-class SAM2ImagePredictor:
+class SAM2ImagePredictor(torch.nn.Module):
     def __init__(
         self,
         sam_model: SAM2Base,
@@ -64,6 +64,12 @@ class SAM2ImagePredictor:
             (128, 128),
             (64, 64),
         ]
+
+    def forward(self, *args, **kwargs):
+        raise NotImplementedError(
+            "Please use the corresponding methods in SAM2VideoPredictor for inference."
+            "See notebooks/video_predictor_example.ipynb for an example."
+        )
 
     @classmethod
     def from_pretrained(cls, model_id: str, **kwargs) -> "SAM2ImagePredictor":
